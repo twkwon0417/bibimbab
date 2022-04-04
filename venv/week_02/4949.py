@@ -1,23 +1,42 @@
 import sys
 
 while True:
+    qq = list()
     strs = sys.stdin.readline()
 
     if strs == ".\n":
         break
 
-    print(strs)
-    left_pren = strs.count("(")
-    right_pren = strs.count(")")
+    for word in strs:
+        if word == "(":
+            qq.append(")")
 
-    left_brac = strs.count("[")
-    right_brac = strs.count("]")
+        elif word == "[":
+            qq.append("]")
 
-    print(left_brac)
-    print(right_brac)
-    print(left_pren)
-    print(right_pren)
-    if left_brac == right_brac and left_pren == right_pren:
+        elif word == ")":
+            try:
+                if qq.pop() == ")":
+                    continue
+                else:
+                    qq.append("x")
+                    break
+            except IndexError:
+                qq.append("x")
+                break
+
+        elif word == "]":
+            try:
+                if qq.pop() == "]":
+                    continue
+                else:
+                    qq.append("x")
+                    break
+            except IndexError:
+                qq.append("x")
+                break
+
+    if len(qq) == 0:
         print("yes")
 
     else:
